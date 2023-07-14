@@ -1,6 +1,6 @@
 /*
-* Brian R Taylor
-* brian.taylor@bolderflight.com
+* Tuan Luong
+* tdluong@crimson.ua.edu
 *
 * Copyright (c) 2022 Bolder Flight Systems Inc
 *
@@ -67,18 +67,20 @@ class SbusRx {
  private:
   /* Communication */
   HardwareSerial *uart_;
-  bool inv_ = true;
+  bool inv_ = false;
   bool fast_ = false;
   #if defined(ESP32)
   int8_t rxpin_, txpin_;
   #endif
-  int32_t baud_ = 100000;
+  int32_t baud_ = 115200;
   /* Message len */
   static constexpr int8_t PAYLOAD_LEN_ = 23;
   static constexpr int8_t HEADER_LEN_ = 1;
   static constexpr int8_t FOOTER_LEN_ = 1;
   /* SBUS message defs */
   static constexpr int8_t NUM_SBUS_CH_ = 16;
+  static constexpr uint8_t XBEE_HEADER = 0x7E;
+  static constexpr uint8_t XBEE_FRAMETYPE = 0x90;
   static constexpr uint8_t HEADER_ = 0x0F;
   static constexpr uint8_t FOOTER_ = 0x00;
   static constexpr uint8_t FOOTER2_ = 0x04;
@@ -122,12 +124,12 @@ class SbusTx {
  private:
   /* Communication */
   HardwareSerial *uart_;
-  bool inv_ = true;
+  bool inv_ = false;
   bool fast_ = false;
   #if defined(ESP32)
   int8_t rxpin_, txpin_;
   #endif
-  int32_t baud_ = 100000;
+  int32_t baud_ = 115200;
   /* Message len */
   static constexpr int8_t BUF_LEN_ = 25;
   /* SBUS message defs */
